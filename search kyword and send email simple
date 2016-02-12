@@ -1,0 +1,44 @@
+from sendmail import sendmail
+import argparse
+import glob
+
+#parser = argparse.ArgumentParser(description='Count occurences of a keyword in one or more files')
+
+#parser.add_argument('keyword', type=str,
+#                    help='Keyword to search for (case insensitive)')
+
+
+#parser.add_argument('logfiles', metavar='logfile', type=argparse.FileType('r'), nargs='+'
+#                    , help='path to logfile(s)')
+
+
+
+
+
+
+#args = parser.parse_args()
+
+#keyword = args.keyword.lower()
+
+keyword = "to use".lower()
+
+count = 0
+
+#for logfile in args.logfiles:
+for logpath in glob.glob('./*.log'):
+    #loop through all the files
+    
+    print ('logpath:',logpath)
+    with open(logpath, 'r') as logfile:
+        for line in logfile:
+            #loop through each line of the file
+            
+            #lowercase the line
+            line = line.lower()
+            
+            #count the keywords in the line
+            count += line.count(keyword)
+
+message = 'Counted %s %s times' % (repr(keyword), count)
+print message
+sendmail(message)
