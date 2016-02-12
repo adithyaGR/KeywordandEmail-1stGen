@@ -1,0 +1,51 @@
+
+
+
+
+import smtplib
+import sys
+
+
+
+
+def sendmail(message):
+    #TODO: REPLACE THIS
+    to = 'agr.nokia@gmail.com'
+    gmail_user = 'agr.nokia@gmail.com'
+    gmail_pwd = '5620Sam!'
+    smtpserver = smtplib.SMTP("smtp.gmail.com",587)
+
+    print 'EHLO ...'
+    smtpserver.ehlo()
+    print 'STARTTLS ...'
+    smtpserver.starttls()
+    print 'EHLO ...'
+    smtpserver.ehlo
+    print 'LOGIN ...'
+    smtpserver.login(gmail_user, gmail_pwd)
+    header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:testing \n'
+    print header
+
+
+    print 'READING STDIN ...'
+    msg = header + '\n' + message
+
+    msg = ''.join(msg)
+        
+        
+    print 'SENDMAIL ...'
+    smtpserver.sendmail(gmail_user, to, msg)
+    print 'done!'
+    smtpserver.close()
+
+
+def main():
+    msg = []
+    for line in sys.stdin.readline():
+        msg.append(line + '\n')
+    msg = ''.join(msg)
+    sendmail(msg)
+    
+if __name__ == '__main__':
+    main()
+
