@@ -1,0 +1,39 @@
+
+
+import json
+
+try:
+    import requests
+    PY_VER = 3
+except:
+    import urllib2
+    PY_VER = 2
+
+
+URL = 'http://midgard.labs.ca.alcatel-lucent.com/api/email/'
+
+
+def _send_py2(data):
+    req = urllib2.Request(URL)
+    req.add_header('Content-Type', 'application/json')
+    res = urllib2.urlopen(req, json.dumps(data))
+    return "Success"
+
+
+def _send_py3(data):
+    r = requests.post(url=URL, data=data)
+    if r.status_code == 200:
+        return "Success"
+    raise Exception("Error")
+
+
+def send(to, subject, message, html=None):
+    data = {'to': to, 'subject': subject, 'message': message}
+    if html:
+        data.update({'html': html})
+    if PY_VER == 3:
+        return _send_py3(data)
+    elif PY_VER == 2:
+        return _send_py2(data)
+    raise Exception('Compatible python library was not found.')
+
