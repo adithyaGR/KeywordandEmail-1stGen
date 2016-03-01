@@ -1,0 +1,23 @@
+import os
+from time import strftime
+import time
+import os.path, time
+try:
+    f=open('file.txt','rb')
+    print "last modified: %s" % time.ctime(os.path.getmtime(f))
+    print os.path.getctime(f)
+    print "created: %s" % time.ctime(os.path.getctime(f))
+    Created_Time=time.ctime(os.path.getctime(f))
+    S=Created_Time[4:-14]
+    print S
+    CurrentTime=strftime('%a %b %d %H:%M:%S %Y')
+    L=CurrentTime[4:-14]
+    print L
+
+    if (S != L):
+        os.remove(f)
+    else:
+        print " equal"
+except IOError:
+    pass
+    
