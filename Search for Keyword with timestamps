@@ -36,7 +36,7 @@ for logpath in glob.glob('/opt/5620sam/server/nms/log/server/EmsServer.log'): #T
             if line.startswith('<'):											#If the line startswith '<' then that line is read or else it skips
                 datepart,_,_ = line.partition('>')								#The line is partioned at the first encounter of '>' and then the left side of the line is stored in variable datapart
                 datepart = datepart[1:]
-
+                                                                                #the lines would look something like <2016.10.24 13:00 4000 ET> Keyword ........
                 date, time, ms, tz = datepart.split(' ')						#split datepart as date, time, ms , tz
 
                 year,month,day = date.split('.')								#Date and time is split in respect with how they are represented in the list
